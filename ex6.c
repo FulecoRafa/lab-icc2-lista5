@@ -2,9 +2,46 @@
 #include <stdlib.h>
 #include <time.h>
 
-/*
-    Coloque o heap sort aqui
-*/
+void heapify(int* v, int n) {
+	int pai; int filho;
+	for (int i = 0; i < n; i++) {
+		filho = i;
+		pai = (filho - 1)/2;
+		
+		while (pai >= 0 && v[filho] > v[pai]) {
+			troca(v + pai, v + filho);
+			filho = pai;
+			pai = (pai - 1)/2;
+		}
+	}
+}
+
+int heapsort(int* v, int n) {
+	heapify(v, n);
+	int fim = n - 1;
+
+	int fimHeap = fim;
+	int pai;
+	int filho;
+
+	for (int i = 0; i < fim; i++) {
+		troca(v, v + fim - i);
+		pai = 0;
+		filho = 1;
+		fimHeap--;
+		while (filho <= fimHeap) {
+			if (filho < fimHeap && v[filho + 1] > v[filho]) filho++;
+			if (v[filho] > v[pai]) {
+				troca(v + pai, v + filho);
+				pai = filho;
+				filho = 2*pai + 1;
+			}
+			else {
+				break;
+			}
+		}
+	}
+}
 
 int generate_random_number(int max){
     return(rand() % (max+1) + 1);
