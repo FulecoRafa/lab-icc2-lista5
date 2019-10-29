@@ -7,7 +7,7 @@ void troca(int *a , int *b){
 	int aux;
 	aux = *a;
 	*a = *b;
-	*b = *a;
+	*b = aux;
 }
 
 void heapify(int* v, int n) {
@@ -116,7 +116,7 @@ int main(void){
         }
         sprintf(str , "%d" , i);
         print_vet(v[i] , size , str);
-		heapsort(v[i] , size + 1);
+		heapsort(v[i] , size);
 		strcat(str , " ordenado");
 		print_vet(v[i] , size , str);
     }
